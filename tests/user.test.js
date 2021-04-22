@@ -1,7 +1,7 @@
 const request = require('supertest');
 const app = require('../src/app');
 const User = require('../src/models/user');
-const { userOneId, userOne, setupDB } = require('./fixtures/db');
+const { userOneId, userOne, setupDB } = require('./__fixtures__/db');
 
 beforeEach(setupDB);
 
@@ -90,7 +90,7 @@ test('Should upload avatar image', async () => {
   await request(app)
     .post('/users/me/avatar')
     .set('Authorization', `Bearer ${userOne.tokens[0]}`)
-    .attach('avatar', 'tests/fixtures/profile-pic.jpg')
+    .attach('avatar', 'tests/__fixtures__/profile-pic.jpg')
     .expect(200);
 
   const user = await User.findById(userOneId);
